@@ -514,9 +514,80 @@ function CTASection() {
   )
 }
 
+// ── Password Gate ─────────────────────────────────────────────────────────────
+
+const CORRECT_PASSWORD = 'unito-saiyo'
+const SESSION_KEY = 'unito_auth'
+
+function PasswordGate({ onAuth }) {
+  const [value, setValue] = useState('')
+  const [error, setError] = useState(false)
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    if (value === CORRECT_PASSWORD) {
+      sessionStorage.setItem(SESSION_KEY, '1')
+      onAuth()
+    } else {
+      setError(true)
+      setValue('')
+    }
+  }
+
+  return (
+    <div style={{
+      minHeight: '100vh',
+      background: '#111111',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontFamily: fontJa,
+    }}>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', width: '280px' }}>
+        <p style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '16px', margin: 0 }}>パスワードを入力してください</p>
+        <input
+          type="password"
+          value={value}
+          onChange={e => { setValue(e.target.value); setError(false) }}
+          autoFocus
+          style={{
+            width: '100%',
+            padding: '10px 14px',
+            background: '#222222',
+            border: error ? '1px solid #FF7474' : '1px solid #6C6C6C',
+            borderRadius: '4px',
+            color: '#FFFFFF',
+            fontSize: '14px',
+            outline: 'none',
+            boxSizing: 'border-box',
+          }}
+        />
+        {error && <p style={{ color: '#FF7474', fontSize: '12px', margin: 0 }}>パスワードが違います</p>}
+        <button type="submit" style={{
+          width: '100%',
+          padding: '10px',
+          background: '#FF7474',
+          border: 'none',
+          borderRadius: '4px',
+          color: '#FFFFFF',
+          fontWeight: 700,
+          fontSize: '14px',
+          cursor: 'pointer',
+        }}>
+          入る
+        </button>
+      </form>
+    </div>
+  )
+}
+
 // ── App ───────────────────────────────────────────────────────────────────────
 
 export default function App() {
+  const [authed, setAuthed] = useState(() => sessionStorage.getItem(SESSION_KEY) === '1')
+
+  if (!authed) return <PasswordGate onAuth={() => setAuthed(true)} />
+
   return (
     <div style={{ minHeight: '100vh', background: '#111111', display: 'flex', justifyContent: 'center' }}>
       <div style={{ width: '400px' }}>
