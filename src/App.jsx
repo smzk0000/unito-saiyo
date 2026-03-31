@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 const fontJa = "'YuGothic', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif"
+const BASE = import.meta.env.BASE_URL
 
 // ── Scroll reveal ─────────────────────────────────────────────────────────────
 
@@ -72,7 +73,7 @@ function HeroSection() {
         padding: '48px 24px',
         backgroundImage: `
           linear-gradient(180deg, rgba(17,17,17,0) 85%, rgba(17,17,17,1) 100%),
-          url('/images/hero-bg.png')
+          url(${BASE}images/hero-bg.png)
         `,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -87,7 +88,7 @@ function HeroSection() {
       >
         <div className="flex items-center gap-1">
           <img
-            src="/images/logo.svg"
+            src={`${BASE}images/logo.svg`}
             alt="Unito"
             style={{ width: '83.2px', height: '28px' }}
           />
@@ -119,10 +120,10 @@ function HeroSection() {
 
       {/* Headline tags */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-        <Reveal delay={0}><TextTag bgImage="/images/text-frame-bg1.png" fontSize="36px">ホテルを一棟動かす</TextTag></Reveal>
-        <Reveal delay={80}><TextTag bgImage="/images/text-frame-bg2.png" fontSize="24px">その経験が君を</TextTag></Reveal>
-        <Reveal delay={160}><TextTag bgImage="/images/text-frame-bg2.png" fontSize="24px" color="#FF4B4B">どこでも通用する人材</TextTag></Reveal>
-        <Reveal delay={240}><TextTag bgImage="/images/text-frame-bg2.png" fontSize="24px">にする。</TextTag></Reveal>
+        <Reveal delay={0}><TextTag bgImage={`${BASE}images/text-frame-bg1.png`} fontSize="36px">ホテルを一棟動かす</TextTag></Reveal>
+        <Reveal delay={80}><TextTag bgImage={`${BASE}images/text-frame-bg2.png`} fontSize="24px">その経験が君を</TextTag></Reveal>
+        <Reveal delay={160}><TextTag bgImage={`${BASE}images/text-frame-bg2.png`} fontSize="24px" color="#FF4B4B">どこでも通用する人材</TextTag></Reveal>
+        <Reveal delay={240}><TextTag bgImage={`${BASE}images/text-frame-bg2.png`} fontSize="24px">にする。</TextTag></Reveal>
       </div>
     </section>
   )
@@ -149,7 +150,7 @@ function AboutSection() {
         style={{ top: '-113px', left: '-160px', width: '350px', height: '350px', flexShrink: 0, zIndex: 0 }}
       >
         <img
-          src="/images/ellipse-photo.png"
+          src={`${BASE}images/ellipse-photo.png`}
           alt=""
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -189,7 +190,7 @@ Unitoの現場は、若いうちから経営者の目線で仕事ができる、
           style={{
             width: '100%',
             height: '250px',
-            backgroundImage: `url('/images/hotel-photo.png')`,
+            backgroundImage: `url(${BASE}images/hotel-photo.png)`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -276,7 +277,7 @@ function CareerSection() {
     <section
       style={{
         fontFamily: fontJa,
-        backgroundImage: `url('/images/career-bg.png')`,
+        backgroundImage: `url(${BASE}images/career-bg.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '48px 32px',
@@ -412,9 +413,9 @@ function StaffCard({ photo, dept, name }) {
 }
 
 const staffData = [
-  { photo: '/images/staff1.png', dept: 'ビジネス推進部', name: '山田 太郎' },
-  { photo: '/images/staff2-1dd95b.png', dept: 'PdM', name: '山田 太郎' },
-  { photo: '/images/staff3.png', dept: 'グロース戦略部', name: '山田 太郎' },
+  { photo: `${BASE}images/staff1.png`, dept: 'ビジネス推進部', name: '山田 太郎' },
+  { photo: `${BASE}images/staff2-1dd95b.png`, dept: 'PdM', name: '山田 太郎' },
+  { photo: `${BASE}images/staff3.png`, dept: 'グロース戦略部', name: '山田 太郎' },
 ]
 
 function StaffSection() {
